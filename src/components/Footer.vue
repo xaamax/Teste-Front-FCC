@@ -1,6 +1,6 @@
 <template>
-  <footer class="main-footer"><strong>Copyright © 2025.</strong>
-    <div style="float: right"><b>Versão</b> 1.0.0</div>
+  <footer class="main-footer">
+    <div><strong>Versão</strong> 1.0.0 | <strong>Copyright © 2025</strong></div>
   </footer>
 </template>
 
@@ -10,17 +10,17 @@ export default {
 };
 </script>
 
-<style>
-footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-}
+<style scoped>
 .main-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   background-color: #f5f5f5;
   border-top: 1px solid #c3c3c3;
   color: #869099;
-  padding: 2rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <h1>Lista de Clientes</h1>
   <Content>
-  <div class="page-header">
+    <div class="page-header">
       <div class="search-and-buttons">
         <div class="input-container">
           <input type="text" placeholder="Pesquisar por Nome ou CPF..." />
@@ -42,7 +42,7 @@ export default {
       ],
     };
   },
-  methods: {
+  methods: {    
     async getAllClientes() {
       this.$store.commit("setLoading", true);
       await this.$axios
@@ -51,17 +51,16 @@ export default {
         .catch((err) => {
           this.$store.commit("setLoading", false);
           this.$toast(`Erro: ${err.message}`, {
-          theme: "colored",
-          type: "error",
-          pauseOnHover: false,
-          pauseOnFocusLoss: false,
+            theme: "colored",
+            type: "error",
+            pauseOnHover: false,
+            pauseOnFocusLoss: false,
+          });
         });
-        })
-        this.$store.commit("setLoading", false);
-        ;
+      this.$store.commit("setLoading", false);
     },
   },
-  mounted() {
+  created() {
     this.getAllClientes();
   },
 };

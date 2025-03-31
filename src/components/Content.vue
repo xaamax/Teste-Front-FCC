@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="container">
     <slot />
   </div>
 </template>
@@ -11,9 +11,10 @@ export default {
 </script>
 
 <style>
-.wrapper {
-  margin: 0 auto;
+.container {
+  margin: auto;
   padding: 0 40px;
   max-width: 1000px;
+  margin-bottom: 100px;
 }
 </style>

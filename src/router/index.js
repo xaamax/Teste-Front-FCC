@@ -32,7 +32,7 @@ const routes = [
         children: [
           { path: 'lista', name: 'clientes.lista', component: ClienteLista },
           { path: 'adicionar', name: 'clientes.adicionar', component: ClienteDetalhes },
-          { path: '/:id/editar', name: 'clientes.editar', component: ClienteDetalhes },
+          { path: ':id/editar', name: 'clientes.editar', component: ClienteDetalhes },
         ]
       }
     ],

@@ -39,7 +39,7 @@ export default {
       }
       let { password, ...rest } = user;
       this.$store.dispatch("login", rest);
-      this.$router.push({ name: "Home" });
+      this.$router.push({ name: "home" });
     },
   },
 };
