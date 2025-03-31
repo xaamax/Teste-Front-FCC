@@ -9,7 +9,10 @@ lerna-debug.log*
 
 # local env files
 .env
-.env.*.production
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 node_modules
 dist
