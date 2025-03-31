@@ -51,10 +51,10 @@ export default {
 }
 
 .login-form input {
+  display: block;
   width: 300px;
   height: 40px;
   padding-left: 20px;
-  display: block;
   margin-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
@@ -64,7 +64,7 @@ export default {
 
 .login-form button {
   width: 320px;
-  border: 1px solid #aa3150;
+  border: none;
   background: #aa3150;
   color: #fff;
   cursor: pointer;

@@ -5,6 +5,10 @@ import Wrapper from '@/components/Wrapper.vue';
 import Login from '@/pages/auth/Login.vue';
 import Home from '@/pages/home/Home.vue';
 
+import Cliente from '@/pages/clientes/Cliente.vue';
+import ClienteLista from '@/pages/clientes/ClienteLista.vue';
+import ClienteDetalhes from '@/pages/clientes/ClienteDetalhes.vue';
+
 const routes = [
   {
     path: '/',
@@ -17,9 +21,20 @@ const routes = [
     children: [
       {
         path: 'home',
-        name: 'Home',
+        name: 'home',
         component: Home,
       },
+      {
+        path: '/clientes',
+        name: 'clientes',
+        component: Cliente,
+        redirect: 'clientes/lista',
+        children: [
+          { path: 'lista', name: 'clientes.lista', component: ClienteLista },
+          { path: 'adicionar', name: 'clientes.adicionar', component: ClienteDetalhes },
+          { path: '/:id/editar', name: 'clientes.editar', component: ClienteDetalhes },
+        ]
+      }
     ],
   },
   {
