@@ -1,5 +1,5 @@
 # Gerenciamento de Clientes
-Versão do Vue.js: v3.5.13". Versão indicada do node: v22.14.0.
+Versão do Vue.js: v3.5.13. Versão indicada do node: v22.14.0.
 
 ## Requisitos da aplicação
 

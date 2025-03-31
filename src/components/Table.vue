@@ -23,6 +23,10 @@
           <button class="btn-details" @click="toggleDetails(rowIndex)">
             {{ expandedRow === rowIndex ? "- Detalhes" : "+ Detalhes" }}
           </button>
+          <button class="btn-details" @click="$router.push(`/clientes/${row.clienteId}/editar`)">
+            Editar
+          </button>
+          <button class="btn-delete" @click="deleteClient(row)">Excluir</button>
         </div>
       </div>
       <div v-if="expandedRow === rowIndex" class="row details-row">
@@ -33,7 +37,8 @@
               :key="key"
               class="detail-item"
             >
-              <strong>{{ subfield.col }}:</strong> {{ getFieldValue(row, subfield.field) }}
+              <strong>{{ subfield.col }}:</strong>
+              {{ getFieldValue(row, subfield.field) }}
             </div>
           </div>
         </div>
@@ -63,9 +68,31 @@ export default {
     getFieldValue(obj, path) {
       const value = path.split(".").reduce((o, p) => (o || {})[p], obj);
       // if (path.includes("data") && value) {
-      //   return this.formatDate(value); 
+      //   return this.formatDate(value);
       // }
       return value || "***";
+    },
+    async deleteClient(client) {
+      if (
+        confirm(
+          `Tem certeza que deseja excluir:
+    \nCliente: ${client.nome}\nCPF: ${client.cpf}
+    \n(*) Essa ação não poderá ser desfeita.`
+        )
+      ) {
+        this.$store.commit("setLoading", true);
+        this.$axios
+          .delete(
+            `${import.meta.env.VITE_CLIENTES_V1}/excluir/${client.clienteId}`
+          )
+          .then(() => location.reload())
+          .catch((error) => {
+            this.$store.commit("setLoading", false);
+            this.$toast.error(error.response?.data?.message, {
+              theme: "colored",
+            });
+          });
+      }
     },
   },
 };
@@ -116,14 +143,18 @@ export default {
   min-width: calc(33% - 16px);
 }
 
-.btn-details {  
-  color: steelblue; 
+.btn-details,
+.btn-delete {
+  color: steelblue;
   background: transparent;
   cursor: pointer;
   border: none;
   padding: 6px;
 }
 
+.btn-delete {
+  color: red;
+}
 
 @media screen and (max-width: 580px) {
   body {
