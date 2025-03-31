@@ -22,6 +22,7 @@ Clone o repositório:
 ```bash
 https://github.com/xaamax/Teste-Front-FCC
 ```
+Acesse o diretório e renomeie o arquivo `.env.example` para `.env`
 Instale as dependências
 ```bash
 npm install
