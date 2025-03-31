@@ -4,12 +4,17 @@
     <div class="page-header">
       <div class="search-and-buttons">
         <div class="input-container">
-          <input type="text" placeholder="Pesquisar por Nome ou CPF..." />
+          <input
+            type="text"
+            placeholder="Pesquisar por Nome ou CPF..."
+            v-model="searchField"
+            @input="filterClients"
+          />
         </div>
         <a class="btn-include" href="/clientes/adicionar">Incluir Cliente</a>
       </div>
     </div>
-    <Table :fields="fieldsTable" :subfields="subfieldsTable" :rows="clientes" />
+    <Table :fields="fieldsTable" :subfields="subfieldsTable" :rows="filteredClients" />
   </Content>
 </template>
 
@@ -20,7 +25,9 @@ export default {
   components: { Content, Table },
   data() {
     return {
+      searchField: '',
       clientes: [],
+      filteredClients: [],
       fieldsTable: [
         { col: "#", field: "clienteId" },
         { col: "Nome", field: "nome" },
@@ -42,12 +49,19 @@ export default {
       ],
     };
   },
-  methods: {    
+  allClientes() {
+    return this.searchField ? this.filteredClients : this.clientes;
+  },
+  methods: {
     async getAllClientes() {
       this.$store.commit("setLoading", true);
       await this.$axios
         .get(`${import.meta.env.VITE_CLIENTES_V1}/listar`)
-        .then((resp) => (this.clientes = resp.data))
+        .then((resp) => { 
+          this.clientes = resp.data
+          this.filteredClients = [...this.clientes];
+
+        })
         .catch((err) => {
           this.$store.commit("setLoading", false);
           this.$toast(`Erro: ${err.message}`, {
@@ -58,6 +72,20 @@ export default {
           });
         });
       this.$store.commit("setLoading", false);
+    },
+    filterClients() {
+      if (!this.searchField) {
+        this.filteredClients = [...this.clientes];
+        return;
+      }
+
+      const term = this.searchField.toLowerCase();
+      this.filteredClients = this.clientes.filter((client) => {
+        return (
+          client.nome.toLowerCase().includes(term) ||
+          client.cpf.toLowerCase().includes(term)
+        );
+      });
     },
   },
   created() {
