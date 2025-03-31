@@ -21,6 +21,9 @@ const store = createStore({
           state.userInfo = null;
           localStorage.removeItem("user-info");
         },
+        setLoading(state, loading) {
+          state.isLoading = loading;
+        },
       },
       actions: {
         login({ commit }, user) {
